@@ -30,7 +30,25 @@ const initialState = [
 export const taskSlice = createSlice({
   name: 'task',
   initialState,
-  reducers: {},
+  reducers: {
+    addTask: (state, action) => {
+      state.push(action.payload);
+    },
+    deleteTask: (state, action) => {
+      console.log(state);
+      const findTask = state.find(task => task.id === action.payload);
+      if (findTask) {
+        state.splice(state.indexOf(findTask), 1);
+      }
+      /////////////////   elimina 1 elemnto desde el indice state.indexOf
+      console.log(state.indexOf(findTask), 1);
+      console.log(state.find(task => task.id === action.payload));
+    },
+    editTask: (state, action) => {
+      console.log(action.payload);
+    },
+  },
 });
 
+export const { addTask, deleteTask, editTask } = taskSlice.actions;
 export default taskSlice.reducer;
